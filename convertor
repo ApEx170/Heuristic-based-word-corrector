@@ -1,0 +1,20 @@
+import PyPDF2
+
+
+def pdf_to_text(pdf_path, txt_path):
+    with open(pdf_path, "rb") as pdf_file:
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
+        with open(txt_path, "w", encoding="utf-8") as txt_file:
+            num_pages = len(pdf_reader.pages)
+            for page_num in range(num_pages):
+                page = pdf_reader.pages[page_num]
+                txt_file.write(page.extract_text())
+
+
+# Example usage
+pdf_file_path = "example.pdf"  # Replace 'example.pdf' with the path to your PDF file
+txt_file_path = "Big_corpus.txt"  # Specify the path where you want to save the text file
+
+
+
+pdf_to_text(pdf_file_path, txt_file_path)
